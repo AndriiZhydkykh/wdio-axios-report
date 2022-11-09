@@ -13,6 +13,7 @@ describe('pet testing', () => {
         const body = await pet.findByStatus('pending')
         console.log(body)
         assert(body.length > 0)
+        assert(body.every((pet:any) => pet.status === 'pending'),'The error response does not contain available pet' )
     });
 
     it.skip('get pets by status sold', async () => {
@@ -27,13 +28,33 @@ describe('pet testing', () => {
         assert(body.length > 0)
     });
 
-    it('get pets by status sold and available', async () => {
+    it.skip('get pets by status sold and available', async () => {
         const body = await pet.findByStatus(['available','sold'])
         console.log(body)
         assert(body.length > 0)
         assert(body.some((pet:any) => pet.status === 'available'),'The error response does not contain available pet' )
         assert(body.some((pet:any) => pet.status === 'sold'),'The error response does not contain sold pet' )
         assert(!body.some((pet:any) => pet.status === 'pending'),'The response contain pending pets' )
+    });
+    it('added a new pet', async () => {
+        const petToCreate = {
+            "category": {
+                "id": 0,
+                "name": "string"
+            },
+            "name": "Cat",
+            "photoUrls": [
+                "http://test.com/image.jpg"
+            ],
+            "tags": [
+                {
+                    "id": 0,
+                    "name": "string"
+                }
+            ],
+            "status": "available"
+        }
+        const addedPet = await pet.addNewPet(petToCreate)
     });
   
     });  

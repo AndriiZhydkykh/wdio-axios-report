@@ -14,4 +14,14 @@ export class PetController{
     })
     return response.data
   }
+  async addNewPet(pet: { id:number,category: { id: number; name: string; }; name: string; photoUrls: string[]; tags: { id: number; name: string; }[]; status: string; }) {
+    const response = await axios.post(`/pet`, {
+        json: pet
+    });
+    return response.data
+}
+  async deletePet(id:number | string){
+    const response = await axios.get(`/pet/${id}`);
+    return response.data
+}
 }
