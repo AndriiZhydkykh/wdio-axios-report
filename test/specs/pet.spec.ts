@@ -1,5 +1,6 @@
 import {strict as assert} from 'assert'
 import {PetController} from '../../api/controller/pet.controller'
+import {components} from '../../temp/types'
 const pet = new PetController()
 
 
@@ -40,8 +41,8 @@ describe('pet testing', () => {
         assert(!body.some((pet:any) => pet.status === 'pending'),'The response contain pending pets' )
     });
     it('can add update and delete a new create pet', async () => {
-        const newPet = {
-            "id": 3335,
+        const newPet:components["schemas"]["Pet"] = {
+            "id":3335,
             "category": {
               "id": 442,
               "name": "snakes"
@@ -63,7 +64,7 @@ describe('pet testing', () => {
           
         let getPetById= await pet.getById(addNewPet.id) 
         assert.deepEqual(newPet,getPetById),'expected the pet data to equal the newPet array'
-         const changePet = {
+         const changePet :components["schemas"]["Pet"]={
             "id":addNewPet.id,
             "category": {
                 "id": 443,

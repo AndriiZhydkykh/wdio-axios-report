@@ -1,8 +1,8 @@
 const axios = require('axios');
+import {components, operations} from '../../temp/types'
 import {JsonRequest} from '../builder'
-axios.defaults.baseURL = 'https://petstore.swagger.io/v2';
 import {URLSearchParams} from 'url'
-
+axios.defaults.baseURL = 'https://petstore.swagger.io/v2';
 export class PetController{
   async getById(id:number | string){
     return (
@@ -20,26 +20,8 @@ export class PetController{
     ).data
   }
 
-  async createNewPet(pet:{
-    id: number;
-    category: {
-        id: number;
-        name: string;
-    };
-    name: string;
-    photoUrls: string[];
-    tags: {
-        id: number;
-        name: string;
-    }[];
-    status: string;
-  }){
-    /* const response = await axios({
-      url:'/pet',
-      method:'post',
-      data:pet
-    }) */
-    //return response.data
+  async createNewPet(pet:components["schemas"]["Pet"]){
+
     return(
       await new JsonRequest()
       .url('/pet')
@@ -49,26 +31,8 @@ export class PetController{
     ).data
   }
 
-  async changeNewPet(pet:{
-    id: number;
-    category: {
-        id: number;
-        name: string;
-    };
-    name: string;
-    photoUrls: string[];
-    tags: {
-        id: number;
-        name: string;
-    }[];
-    status: string;
-  }){
-    /* const response = await axios({
-      url:'/pet',
-      method:'put',
-      data:pet
-    })
-    return response.data */
+  async changeNewPet(pet:components["schemas"]["Pet"]){
+
     return(
       await new JsonRequest()
       .url('/pet')
